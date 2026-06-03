@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Hai Hoang | AI Portfolio</title>
+  <meta name="description" content="Portfolio ca nhan cua Le Hai Hoang, sinh vien nganh Tri tue nhan tao tai Truong Dai hoc Cong nghe - DHQGHN.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --ink: #111513;
+      --muted: #59645f;
+      --soft: #f4f1eb;
+      --paper: #fffdf8;
+      --line: #ddd6ca;
+      --accent: #106b4f;
+      --accent-2: #d35f2d;
+      --accent-soft: #e7f2ed;
+      --dark: #17211d;
+      --white: #ffffff;
+      --shadow: 0 22px 70px rgba(17, 21, 19, 0.12);
+      --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: "Playfair Display", Georgia, serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--paper);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body.is-switching [data-i18n] {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+
+    [data-i18n] {
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .site-nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem clamp(1rem, 4vw, 4.5rem);
+      background: rgba(255, 253, 248, 0.9);
+      border-bottom: 1px solid rgba(221, 214, 202, 0.85);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.5rem, 2vw, 1.4rem);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.85rem, 2vw, 2rem);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--accent);
+    }
+
+    .language-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 116px;
+      min-height: 44px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      box-shadow: 0 8px 24px rgba(17, 21, 19, 0.08);
+    }
+
+    .language-switch button {
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font: 700 0.76rem/1 var(--sans);
+      cursor: pointer;
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    .language-switch button[aria-pressed="true"] {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .language-switch button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(16, 107, 79, 0.28);
+      outline-offset: 3px;
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92dvh;
+      display: grid;
+      align-items: center;
+      padding: 8rem clamp(1.25rem, 5vw, 5rem) 5rem;
+      border-bottom: 1px solid var(--line);
+      isolation: isolate;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0 0 0 auto;
+      width: min(48vw, 660px);
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 32%;
+      filter: saturate(0.95) contrast(1.02);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, var(--paper) 0%, rgba(255, 253, 248, 0.96) 46%, rgba(255, 253, 248, 0.62) 70%, rgba(255, 253, 248, 0.2) 100%),
+        linear-gradient(180deg, rgba(255, 253, 248, 0.2), rgba(244, 241, 235, 0.82));
+    }
+
+    .hero-content {
+      width: min(760px, 100%);
+    }
+
+    .eyebrow {
+      margin: 0 0 1rem;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin-bottom: 1.25rem;
+      font-family: var(--serif);
+      font-size: clamp(3.1rem, 8vw, 7.4rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .hero-lede {
+      max-width: 590px;
+      margin-bottom: 2rem;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-bottom: 2.3rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid rgba(16, 107, 79, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--dark);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.8rem 1.05rem;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: #0c5b42;
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--accent);
+    }
+
+    .button.secondary:hover {
+      background: var(--accent-soft);
+    }
+
+    section {
+      padding: clamp(4.5rem, 8vw, 7rem) clamp(1.25rem, 5vw, 5rem);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(160px, 0.55fr) minmax(0, 1.45fr);
+      gap: clamp(1.5rem, 5vw, 5rem);
+      align-items: start;
+      margin-bottom: clamp(2rem, 5vw, 4rem);
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin-bottom: 0;
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1.25rem, 4vw, 3rem);
+    }
+
+    .intro-grid.single {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 14px 45px rgba(17, 21, 19, 0.06);
+    }
+
+    .panel-inner {
+      padding: clamp(1.25rem, 3vw, 2rem);
+    }
+
+    .lead {
+      color: var(--ink);
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      line-height: 1.65;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .facts {
+      display: grid;
+      gap: 1rem;
+      margin: 0;
+    }
+
+    .about-topics {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .about-topic {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .about-topic:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .topic-label {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .about-topic p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .fact {
+      display: grid;
+      grid-template-columns: minmax(110px, 0.45fr) minmax(0, 1fr);
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fact:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .fact dt {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .fact dd {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .education {
+      background: var(--soft);
+    }
+
+    .education-grid,
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .stat,
+    .skill-group {
+      min-height: 168px;
+      padding: 1.3rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .stat-value {
+      display: block;
+      margin-bottom: 0.7rem;
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .stat-title,
+    .skill-title {
+      margin-bottom: 0.45rem;
+      font-weight: 800;
+    }
+
+    .stat-copy,
+    .skill-list {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .skill-list li {
+      padding: 0.28rem 0.55rem;
+      border: 1px solid rgba(16, 107, 79, 0.18);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #1f493b;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .projects-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 1fr) auto;
+      gap: clamp(1rem, 3vw, 2rem);
+      align-items: start;
+      padding: clamp(1.1rem, 3vw, 1.8rem);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.76);
+      transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .project:hover {
+      transform: translateY(-2px);
+      border-color: rgba(16, 107, 79, 0.45);
+      box-shadow: 0 16px 42px rgba(17, 21, 19, 0.08);
+    }
+
+    .project-number {
+      color: var(--accent-2);
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .project h3 {
+      margin-bottom: 0.5rem;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      line-height: 1.25;
+    }
+
+    .project p {
+      max-width: 820px;
+      margin-bottom: 1rem;
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--dark);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 116px;
+      min-height: 44px;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: background 180ms ease, border-color 180ms ease;
+    }
+
+    .project-link:hover {
+      background: var(--accent-soft);
+      border-color: rgba(16, 107, 79, 0.4);
+    }
+
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .quote-panel {
+      display: flex;
+      min-height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--dark);
+      color: var(--white);
+    }
+
+    .quote-panel .panel-inner {
+      display: flex;
+      min-height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .quote {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 3.4rem);
+      line-height: 1.15;
+    }
+
+    .reflection-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .reflection-item {
+      padding: 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    .reflection-item h3 {
+      margin-bottom: 0.45rem;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .reflection-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .contact {
+      background: var(--soft);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(1.5rem, 5vw, 4rem);
+      align-items: end;
+    }
+
+    .contact-title {
+      margin-bottom: 1rem;
+      font-family: var(--serif);
+      font-size: clamp(2.3rem, 6vw, 5rem);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .contact-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .contact-links a {
+      display: flex;
+      min-height: 56px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--dark);
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+
+    .contact-icon {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+      color: var(--accent);
+    }
+
+    .contact-links a:hover {
+      border-color: rgba(16, 107, 79, 0.45);
+      background: var(--accent-soft);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.4rem clamp(1.25rem, 5vw, 5rem);
+      color: var(--muted);
+      font-size: 0.88rem;
+      background: var(--paper);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+
+      .hero {
+        min-height: auto;
+        padding-top: 7rem;
+      }
+
+      .hero-photo {
+        position: relative;
+        inset: auto;
+        order: -1;
+        width: min(100%, 420px);
+        height: auto;
+        margin-bottom: 2rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero-photo img {
+        aspect-ratio: 4 / 5;
+      }
+
+      .hero::before {
+        background: linear-gradient(180deg, var(--paper), var(--soft));
+      }
+
+      .section-heading,
+      .intro-grid,
+      .reflection-grid,
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .education-grid,
+      .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .project {
+        grid-template-columns: 64px minmax(0, 1fr);
+      }
+
+      .project-link {
+        grid-column: 2;
+        width: fit-content;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .site-nav {
+        padding-inline: 1rem;
+      }
+
+      .brand {
+        font-size: 1rem;
+      }
+
+      .language-switch {
+        width: 104px;
+      }
+
+      h1 {
+        font-size: clamp(2.65rem, 16vw, 4.7rem);
+      }
+
+      .hero-meta {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .pill {
+        width: fit-content;
+      }
+
+      .education-grid,
+      .skills-grid,
+      .contact-links {
+        grid-template-columns: 1fr;
+      }
+
+      .fact {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
+
+      .project {
+        grid-template-columns: 1fr;
+      }
+
+      .project-link {
+        grid-column: auto;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-nav">
+    <a class="brand" href="#home" data-i18n="brand">Lê Hải Hoàng</a>
+    <div class="nav-actions">
+      <ul class="nav-links" aria-label="Primary navigation">
+        <li><a href="#about" data-i18n="navAbout">Giới thiệu</a></li>
+        <li><a href="#education" data-i18n="navEducation">Học tập</a></li>
+        <li><a href="#projects" data-i18n="navProjects">Dự án</a></li>
+        <li><a href="#reflection" data-i18n="navReflection">Tổng kết</a></li>
+        <li><a href="#contact" data-i18n="navContact">Liên hệ</a></li>
+      </ul>
+      <div class="language-switch" aria-label="Language selector">
+        <button type="button" data-lang="vi" aria-pressed="true">VN</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-photo" aria-hidden="true">
+        <img src="ảnh.jpg" alt="" width="1080" height="1080">
+      </div>
+      <div class="hero-content reveal">
+        <p class="eyebrow" data-i18n="heroEyebrow">Portfolio kỹ thuật số</p>
+        <h1 id="hero-title" data-i18n="heroTitle">Lê Hải Hoàng</h1>
+        <p class="hero-lede" data-i18n="heroLead">Sinh viên ngành Trí tuệ nhân tạo tại Trường Đại học Công nghệ - ĐHQGHN, quan tâm đến cách AI, tư duy tính toán và kỹ năng số có thể giải quyết những vấn đề học tập và đời sống một cách có trách nhiệm.</p>
+        <div class="hero-meta" aria-label="Profile highlights">
+          <span class="pill" data-i18n="heroPill1">K70 - AI2</span>
+          <span class="pill" data-i18n="heroPill2">GPA 4.0</span>
+          <span class="pill" data-i18n="heroPill3">Hà Nội, Việt Nam</span>
+        </div>
+        <div class="hero-cta">
+          <a class="button" href="#projects" data-i18n="heroCtaPrimary">Xem bài tập</a>
+          <a class="button secondary" href="mailto:haihoangle.forwork@gmail.com" data-i18n="heroCtaSecondary">Liên hệ</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker" data-i18n="aboutKicker">01 / Giới thiệu</p>
+          <h2 class="section-title" id="about-title" data-i18n="aboutTitle">Một hồ sơ học tập gọn gàng, rõ ràng và có thể chia sẻ.</h2>
+        </div>
+        <div class="intro-grid single">
+          <article class="panel reveal">
+            <div class="panel-inner">
+              <p class="lead" data-i18n="aboutLead">Mình là sinh viên chuyên ngành Trí tuệ Nhân tạo, đam mê giải quyết các bài toán thực tế thông qua dữ liệu và các kiến trúc học sâu (Deep Learning). Sở hữu tư duy toán học logic mạnh mẽ cùng khả năng hiện thực hóa thuật toán bằng code, mình luôn hướng tới việc xây dựng các mô hình AI hiệu quả, chính xác và có giá trị ứng dụng cao. Bên cạnh công nghệ, mình tìm kiếm sự cân bằng và cảm hứng sáng tạo qua âm nhạc.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="education" aria-labelledby="education-title">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker" data-i18n="educationKicker">02 / Học tập</p>
+          <h2 class="section-title" id="education-title" data-i18n="educationTitle">Nền tảng học thuật định hướng AI.</h2>
+        </div>
+        <div class="education-grid">
+          <article class="stat reveal">
+            <span class="stat-value">UET</span>
+            <h3 class="stat-title" data-i18n="eduSchoolTitle">Trường</h3>
+            <p class="stat-copy" data-i18n="eduSchoolCopy">Trường Đại học Công nghệ - ĐHQGHN.</p>
+          </article>
+          <article class="stat reveal">
+            <span class="stat-value">AI</span>
+            <h3 class="stat-title" data-i18n="eduMajorTitle">Ngành học</h3>
+            <p class="stat-copy" data-i18n="eduMajorCopy">Trí tuệ nhân tạo, lớp K70 - AI2.</p>
+          </article>
+          <article class="stat reveal">
+            <span class="stat-value">4.0</span>
+            <h3 class="stat-title" data-i18n="eduGpaTitle">GPA</h3>
+            <p class="stat-copy" data-i18n="eduGpaCopy">Duy trì tinh thần học tập nghiêm túc và ổn định.</p>
+          </article>
+          <article class="stat reveal">
+            <span class="stat-value">KKHT</span>
+            <h3 class="stat-title" data-i18n="eduAwardTitle">Học bổng</h3>
+            <p class="stat-copy" data-i18n="eduAwardCopy">Học bổng khuyến khích học tập của trường Đại học Công nghệ.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-title">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker" data-i18n="skillsKicker">03 / Kỹ năng</p>
+          <h2 class="section-title" id="skills-title" data-i18n="skillsTitle">Những năng lực đang được rèn luyện qua môn học.</h2>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-group reveal">
+            <h3 class="skill-title" data-i18n="skill1Title">Nền tảng học thuật</h3>
+            <ul class="skill-list">
+              <li data-i18n="skill1Item1">Cấu trúc dữ liệu</li>
+              <li data-i18n="skill1Item2">Giải thuật</li>
+              <li data-i18n="skill1Item3">Giải tích</li>
+              <li data-i18n="skill1Item4">Tư duy tính toán</li>
+            </ul>
+          </article>
+          <article class="skill-group reveal">
+            <h3 class="skill-title" data-i18n="skill2Title">Công cụ số</h3>
+            <ul class="skill-list">
+              <li data-i18n="skill2Item1">Quản lý tệp</li>
+              <li data-i18n="skill2Item2">Google Workspace</li>
+              <li data-i18n="skill2Item3">Tìm kiếm học thuật</li>
+              <li data-i18n="skill2Item4">Lưu trữ tài liệu</li>
+            </ul>
+          </article>
+          <article class="skill-group reveal">
+            <h3 class="skill-title" data-i18n="skill3Title">AI ứng dụng</h3>
+            <ul class="skill-list">
+              <li data-i18n="skill3Item1">Prompt engineering</li>
+              <li data-i18n="skill3Item2">Đánh giá đầu ra AI</li>
+              <li data-i18n="skill3Item3">Sáng tạo nội dung</li>
+              <li data-i18n="skill3Item4">Sử dụng AI có trách nhiệm</li>
+            </ul>
+          </article>
+          <article class="skill-group reveal">
+            <h3 class="skill-title" data-i18n="skill4Title">Kỹ năng mềm</h3>
+            <ul class="skill-list">
+              <li data-i18n="skill4Item1">Hợp tác nhóm</li>
+              <li data-i18n="skill4Item2">Trình bày kết quả</li>
+              <li data-i18n="skill4Item3">Tự học</li>
+              <li data-i18n="skill4Item4">Phản biện thông tin</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-title">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker" data-i18n="projectsKicker">04 / Dự án môn học</p>
+          <h2 class="section-title" id="projects-title" data-i18n="projectsTitle">Sáu bài tập được hệ thống hóa thành một sản phẩm portfolio.</h2>
+        </div>
+        <div class="projects-list">
+          <article class="project reveal">
+            <span class="project-number">01</span>
+            <div>
+              <h3 data-i18n="project1Title">Thao tác cơ bản với tệp và thư mục</h3>
+              <p data-i18n="project1Desc">Tổ chức lại thư mục học tập theo cấu trúc rõ ràng, đặt tên tệp nhất quán và ghi lại quy trình bằng ảnh chụp minh họa. Bài tập giúp tôi hiểu rằng quản lý dữ liệu tốt là bước đầu để học tập và làm việc hiệu quả.</p>
+              <div class="tags">
+                <span class="tag" data-i18n="project1Tag1">File system</span>
+                <span class="tag" data-i18n="project1Tag2">Tổ chức dữ liệu</span>
+                <span class="tag" data-i18n="project1Tag3">Minh chứng</span>
+              </div>
+            </div>
+            <a class="project-link" href="Bài tập từ tuần 1-6/tuần 1.pdf" target="_blank" rel="noopener" data-i18n="projectLink">Xem PDF</a>
+          </article>
+
+          <article class="project reveal">
+            <span class="project-number">02</span>
+            <div>
+              <h3 data-i18n="project2Title">Tìm kiếm và đánh giá thông tin học thuật</h3>
+              <p data-i18n="project2Desc">Thực hành tìm kiếm tài liệu từ nhiều nguồn, so sánh độ tin cậy, kiểm tra tác giả, năm xuất bản và mục đích sử dụng. Kết quả là một bảng đánh giá nguồn giúp tôi hình thành thói quen không tiếp nhận thông tin một cách thụ động.</p>
+              <div class="tags">
+                <span class="tag" data-i18n="project2Tag1">Academic search</span>
+                <span class="tag" data-i18n="project2Tag2">Nguồn tin</span>
+                <span class="tag" data-i18n="project2Tag3">Đánh giá</span>
+              </div>
+            </div>
+            <a class="project-link" href="Bài tập từ tuần 1-6/tuan 2.pdf" target="_blank" rel="noopener" data-i18n="projectLink">Xem PDF</a>
+          </article>
+
+          <article class="project reveal">
+            <span class="project-number">03</span>
+            <div>
+              <h3 data-i18n="project3Title">Viết prompt hiệu quả cho tác vụ học tập</h3>
+              <p data-i18n="project3Desc">So sánh prompt ban đầu với prompt cải tiến bằng cách bổ sung vai trò, bối cảnh, yêu cầu đầu ra và tiêu chí đánh giá. Qua bài này, tôi nhận ra chất lượng câu hỏi ảnh hưởng trực tiếp đến chất lượng câu trả lời của AI.</p>
+              <div class="tags">
+                <span class="tag" data-i18n="project3Tag1">Prompt</span>
+                <span class="tag" data-i18n="project3Tag2">AI hỗ trợ học tập</span>
+                <span class="tag" data-i18n="project3Tag3">So sánh kết quả</span>
+              </div>
+            </div>
+            <a class="project-link" href="Bài tập từ tuần 1-6/tuần 3.pdf" target="_blank" rel="noopener" data-i18n="projectLink">Xem PDF</a>
+          </article>
+
+          <article class="project reveal">
+            <span class="project-number">04</span>
+            <div>
+              <h3 data-i18n="project4Title">Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm</h3>
+              <p data-i18n="project4Desc">Mô phỏng quy trình làm việc nhóm bằng các công cụ trực tuyến như tài liệu chia sẻ, phân công nhiệm vụ và theo dõi tiến độ. Bài tập nhấn mạnh vai trò của giao tiếp rõ ràng và lưu vết công việc trong môi trường số.</p>
+              <div class="tags">
+                <span class="tag" data-i18n="project4Tag1">Collaboration</span>
+                <span class="tag" data-i18n="project4Tag2">Quản lý nhóm</span>
+                <span class="tag" data-i18n="project4Tag3">Làm việc số</span>
+              </div>
+            </div>
+            <a class="project-link" href="Bài tập từ tuần 1-6/tuần 4.pdf" target="_blank" rel="noopener" data-i18n="projectLink">Xem PDF</a>
+          </article>
+
+          <article class="project reveal">
+            <span class="project-number">05</span>
+            <div>
+              <h3 data-i18n="project5Title">Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung</h3>
+              <p data-i18n="project5Desc">Ứng dụng AI để lên ý tưởng, tạo bản nháp nội dung và cải thiện cách trình bày. Tôi tập trung vào việc kiểm tra lại thông tin, chỉnh sửa theo giọng văn cá nhân và xem AI như công cụ hỗ trợ thay vì thay thế tư duy của người học.</p>
+              <div class="tags">
+                <span class="tag" data-i18n="project5Tag1">Generative AI</span>
+                <span class="tag" data-i18n="project5Tag2">Sáng tạo</span>
+                <span class="tag" data-i18n="project5Tag3">Biên tập</span>
+              </div>
+            </div>
+            <a class="project-link" href="Bài tập từ tuần 1-6/tuần 5.pdf" target="_blank" rel="noopener" data-i18n="projectLink">Xem PDF</a>
+          </article>
+
+          <article class="project reveal">
+            <span class="project-number">06</span>
+            <div>
+              <h3 data-i18n="project6Title">Sử dụng AI có trách nhiệm trong học tập và nghiên cứu</h3>
+              <p data-i18n="project6Desc">Tìm hiểu các nguyên tắc về minh bạch, trích dẫn, quyền riêng tư và liêm chính học thuật khi dùng AI. Bài tập giúp tôi xác định ranh giới giữa hỗ trợ hợp lý và phụ thuộc quá mức vào công cụ.</p>
+              <div class="tags">
+                <span class="tag" data-i18n="project6Tag1">AI ethics</span>
+                <span class="tag" data-i18n="project6Tag2">Liêm chính học thuật</span>
+                <span class="tag" data-i18n="project6Tag3">Trách nhiệm</span>
+              </div>
+            </div>
+            <a class="project-link" href="Bài tập từ tuần 1-6/tuần 6.pdf" target="_blank" rel="noopener" data-i18n="projectLink">Xem PDF</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="reflection" aria-labelledby="reflection-title">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker" data-i18n="reflectionKicker">05 / Tổng kết</p>
+          <h2 class="section-title" id="reflection-title" data-i18n="reflectionTitle">Nhìn lại quá trình xây dựng portfolio.</h2>
+        </div>
+        <div class="reflection-grid">
+          <article class="panel quote-panel reveal">
+            <div class="panel-inner">
+              <p class="quote" data-i18n="reflectionQuote">“Công nghệ chỉ thật sự hữu ích khi mình biết đặt câu hỏi đúng và dùng nó một cách có trách nhiệm.”</p>
+              <p data-i18n="reflectionQuoteMeta">Bài học lớn nhất sau quá trình làm portfolio</p>
+            </div>
+          </article>
+          <div class="reflection-list">
+            <article class="reflection-item reveal">
+              <h3 data-i18n="reflection1Title">Điều học được</h3>
+              <p data-i18n="reflection1Copy">Tôi học được cách biến các bài tập rời rạc thành một hệ thống có cấu trúc, dễ đọc và có minh chứng rõ ràng. Đây cũng là cơ hội để nhìn lại quá trình học thay vì chỉ lưu kết quả cuối cùng.</p>
+            </article>
+            <article class="reflection-item reveal">
+              <h3 data-i18n="reflection2Title">Kỹ năng quan trọng</h3>
+              <p data-i18n="reflection2Copy">Kỹ năng quan trọng nhất là tư duy đánh giá: đánh giá nguồn tin, đánh giá đầu ra của AI, đánh giá cách trình bày và đánh giá mức độ phù hợp của công cụ với từng nhiệm vụ.</p>
+            </article>
+            <article class="reflection-item reveal">
+              <h3 data-i18n="reflection3Title">Thách thức</h3>
+              <p data-i18n="reflection3Copy">Khó khăn lớn nhất là sắp xếp nội dung sao cho ngắn gọn nhưng vẫn đủ ý. Tôi giải quyết bằng cách chia portfolio thành từng phần rõ ràng: giới thiệu, học tập, dự án và tổng kết.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="section-shell contact-layout">
+        <div class="reveal">
+          <p class="section-kicker" data-i18n="contactKicker">06 / Liên hệ</p>
+          <h2 class="contact-title" id="contact-title" data-i18n="contactTitle">Sẵn sàng kết nối và học hỏi.</h2>
+          <p class="muted" data-i18n="contactCopy">Tôi luôn sẵn sàng trao đổi về học tập, công nghệ số, trí tuệ nhân tạo và các cơ hội phát triển bản thân.</p>
+        </div>
+        <div class="contact-links reveal">
+          <a href="mailto:haihoangle.forwork@gmail.com" aria-label="Email">
+            <span class="contact-label">
+              <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm-.4 4.25-7.07 5.3a.9.9 0 0 1-1.06 0L4.4 8.25V6.5l7.6 5.7 7.6-5.7v1.75Z"/>
+              </svg>
+              <span data-i18n="contactEmail">Email</span>
+            </span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="tel:+84364602226" aria-label="Phone number">
+            <span class="contact-label">
+              <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M6.62 10.79a15.1 15.1 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.5 11.5 0 0 0 3.58.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2Z"/>
+              </svg>
+              <span data-i18n="contactPhone">0364602226</span>
+            </span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="https://www.facebook.com/lehai.hoang.3705/?locale=vi_VN" target="_blank" rel="noopener" aria-label="Facebook">
+            <span class="contact-label">
+              <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.77l-.44 2.91h-2.33V22C18.34 21.24 22 17.08 22 12.06Z"/>
+              </svg>
+              <span data-i18n="contactFacebook">Facebook</span>
+            </span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/hai-hoang-b96833300/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <span class="contact-label">
+              <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.32 7.41a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.04H3.54V8.98H7.1v11.47ZM22.23 0H1.76C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.76 24h20.47c.97 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0Z"/>
+              </svg>
+              <span data-i18n="contactLinkedIn">LinkedIn</span>
+            </span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="https://github.com/HaiHoang-AI" target="_blank" rel="noopener" aria-label="GitHub">
+            <span class="contact-label">
+              <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M12 .5A11.5 11.5 0 0 0 .5 12.3c0 5.2 3.38 9.61 8.07 11.17.59.11.8-.26.8-.58v-2.03c-3.28.73-3.97-1.62-3.97-1.62-.54-1.4-1.32-1.77-1.32-1.77-1.08-.75.08-.73.08-.73 1.2.09 1.84 1.27 1.84 1.27 1.06 1.87 2.8 1.33 3.48 1.02.11-.79.42-1.33.76-1.63-2.62-.31-5.37-1.35-5.37-5.99 0-1.32.46-2.4 1.23-3.25-.12-.31-.53-1.55.12-3.21 0 0 1-.33 3.3 1.24a11.12 11.12 0 0 1 6.02 0c2.3-1.57 3.3-1.24 3.3-1.24.65 1.66.24 2.9.12 3.21.77.85 1.23 1.93 1.23 3.25 0 4.65-2.76 5.67-5.39 5.98.43.38.81 1.12.81 2.26v3.35c0 .32.21.7.81.58a11.8 11.8 0 0 0 8.06-11.17A11.5 11.5 0 0 0 12 .5Z"/>
+              </svg>
+              <span data-i18n="contactGitHub">GitHub</span>
+            </span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span data-i18n="footerLeft">© 2026 Lê Hải Hoàng</span>
+    <span data-i18n="footerRight">AI Student Portfolio</span>
+  </footer>
+
+  <script>
+    const translations = {
+      vi: {
+        brand: "Lê Hải Hoàng",
+        navAbout: "Giới thiệu",
+        navEducation: "Học tập",
+        navProjects: "Dự án",
+        navReflection: "Tổng kết",
+        navContact: "Liên hệ",
+        heroEyebrow: "Portfolio kỹ thuật số",
+        heroTitle: "Lê Hải Hoàng",
+        heroLead: "Sinh viên ngành Trí tuệ nhân tạo tại Trường Đại học Công nghệ - ĐHQGHN, quan tâm đến cách AI, tư duy tính toán và kỹ năng số có thể giải quyết những vấn đề học tập và đời sống một cách có trách nhiệm.",
+        heroPill1: "K70 - AI2",
+        heroPill2: "GPA 4.0",
+        heroPill3: "Hà Nội, Việt Nam",
+        heroCtaPrimary: "Xem bài tập",
+        heroCtaSecondary: "Liên hệ",
+        aboutKicker: "01 / Giới thiệu",
+        aboutTitle: "Một hồ sơ học tập gọn gàng, rõ ràng và có thể chia sẻ.",
+        aboutLead: "Mình là sinh viên chuyên ngành Trí tuệ Nhân tạo, đam mê giải quyết các bài toán thực tế thông qua dữ liệu và các kiến trúc học sâu (Deep Learning). Sở hữu tư duy toán học logic mạnh mẽ cùng khả năng hiện thực hóa thuật toán bằng code, mình luôn hướng tới việc xây dựng các mô hình AI hiệu quả, chính xác và có giá trị ứng dụng cao. Bên cạnh công nghệ, mình tìm kiếm sự cân bằng và cảm hứng sáng tạo qua âm nhạc.",
+        factNameLabel: "Họ tên",
+        factName: "Lê Hải Hoàng",
+        factDobLabel: "Ngày sinh",
+        factDob: "14/03/2007",
+        factLocationLabel: "Địa chỉ",
+        factLocation: "Hà Nội, Việt Nam",
+        factInterestLabel: "Quan tâm",
+        factInterest: "AI ứng dụng, thuật toán, học tập số",
+        educationKicker: "02 / Học tập",
+        educationTitle: "Nền tảng học thuật định hướng AI.",
+        eduSchoolTitle: "Trường",
+        eduSchoolCopy: "Trường Đại học Công nghệ - ĐHQGHN.",
+        eduMajorTitle: "Ngành học",
+        eduMajorCopy: "Trí tuệ nhân tạo, lớp K70 - AI2.",
+        eduGpaTitle: "GPA",
+        eduGpaCopy: "Duy trì tinh thần học tập nghiêm túc và ổn định.",
+        eduAwardTitle: "Học bổng",
+        eduAwardCopy: "Học bổng khuyến khích học tập của trường Đại học Công nghệ.",
+        skillsKicker: "03 / Kỹ năng",
+        skillsTitle: "Những năng lực đang được rèn luyện qua môn học.",
+        skill1Title: "Nền tảng học thuật",
+        skill1Item1: "Cấu trúc dữ liệu",
+        skill1Item2: "Giải thuật",
+        skill1Item3: "Giải tích",
+        skill1Item4: "Tư duy tính toán",
+        skill2Title: "Công cụ số",
+        skill2Item1: "Quản lý tệp",
+        skill2Item2: "Google Workspace",
+        skill2Item3: "Tìm kiếm học thuật",
+        skill2Item4: "Lưu trữ tài liệu",
+        skill3Title: "AI ứng dụng",
+        skill3Item1: "Prompt engineering",
+        skill3Item2: "Đánh giá đầu ra AI",
+        skill3Item3: "Sáng tạo nội dung",
+        skill3Item4: "Sử dụng AI có trách nhiệm",
+        skill4Title: "Kỹ năng mềm",
+        skill4Item1: "Hợp tác nhóm",
+        skill4Item2: "Trình bày kết quả",
+        skill4Item3: "Tự học",
+        skill4Item4: "Phản biện thông tin",
+        projectsKicker: "04 / Dự án môn học",
+        projectsTitle: "Sáu bài tập được hệ thống hóa thành một sản phẩm portfolio.",
+        projectLink: "Xem PDF",
+        project1Title: "Thao tác cơ bản với tệp và thư mục",
+        project1Desc: "Tổ chức lại thư mục học tập theo cấu trúc rõ ràng, đặt tên tệp nhất quán và ghi lại quy trình bằng ảnh chụp minh họa. Bài tập giúp tôi hiểu rằng quản lý dữ liệu tốt là bước đầu để học tập và làm việc hiệu quả.",
+        project1Tag1: "File system",
+        project1Tag2: "Tổ chức dữ liệu",
+        project1Tag3: "Minh chứng",
+        project2Title: "Tìm kiếm và đánh giá thông tin học thuật",
+        project2Desc: "Thực hành tìm kiếm tài liệu từ nhiều nguồn, so sánh độ tin cậy, kiểm tra tác giả, năm xuất bản và mục đích sử dụng. Kết quả là một bảng đánh giá nguồn giúp tôi hình thành thói quen không tiếp nhận thông tin một cách thụ động.",
+        project2Tag1: "Academic search",
+        project2Tag2: "Nguồn tin",
+        project2Tag3: "Đánh giá",
+        project3Title: "Viết prompt hiệu quả cho tác vụ học tập",
+        project3Desc: "So sánh prompt ban đầu với prompt cải tiến bằng cách bổ sung vai trò, bối cảnh, yêu cầu đầu ra và tiêu chí đánh giá. Qua bài này, tôi nhận ra chất lượng câu hỏi ảnh hưởng trực tiếp đến chất lượng câu trả lời của AI.",
+        project3Tag1: "Prompt",
+        project3Tag2: "AI hỗ trợ học tập",
+        project3Tag3: "So sánh kết quả",
+        project4Title: "Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm",
+        project4Desc: "Mô phỏng quy trình làm việc nhóm bằng các công cụ trực tuyến như tài liệu chia sẻ, phân công nhiệm vụ và theo dõi tiến độ. Bài tập nhấn mạnh vai trò của giao tiếp rõ ràng và lưu vết công việc trong môi trường số.",
+        project4Tag1: "Collaboration",
+        project4Tag2: "Quản lý nhóm",
+        project4Tag3: "Làm việc số",
+        project5Title: "Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung",
+        project5Desc: "Ứng dụng AI để lên ý tưởng, tạo bản nháp nội dung và cải thiện cách trình bày. Tôi tập trung vào việc kiểm tra lại thông tin, chỉnh sửa theo giọng văn cá nhân và xem AI như công cụ hỗ trợ thay vì thay thế tư duy của người học.",
+        project5Tag1: "Generative AI",
+        project5Tag2: "Sáng tạo",
+        project5Tag3: "Biên tập",
+        project6Title: "Sử dụng AI có trách nhiệm trong học tập và nghiên cứu",
+        project6Desc: "Tìm hiểu các nguyên tắc về minh bạch, trích dẫn, quyền riêng tư và liêm chính học thuật khi dùng AI. Bài tập giúp tôi xác định ranh giới giữa hỗ trợ hợp lý và phụ thuộc quá mức vào công cụ.",
+        project6Tag1: "AI ethics",
+        project6Tag2: "Liêm chính học thuật",
+        project6Tag3: "Trách nhiệm",
+        reflectionKicker: "05 / Tổng kết",
+        reflectionTitle: "Nhìn lại quá trình xây dựng portfolio.",
+        reflectionQuote: "“Công nghệ chỉ thật sự hữu ích khi mình biết đặt câu hỏi đúng và dùng nó một cách có trách nhiệm.”",
+        reflectionQuoteMeta: "Bài học lớn nhất sau quá trình làm portfolio",
+        reflection1Title: "Điều học được",
+        reflection1Copy: "Tôi học được cách biến các bài tập rời rạc thành một hệ thống có cấu trúc, dễ đọc và có minh chứng rõ ràng. Đây cũng là cơ hội để nhìn lại quá trình học thay vì chỉ lưu kết quả cuối cùng.",
+        reflection2Title: "Kỹ năng quan trọng",
+        reflection2Copy: "Kỹ năng quan trọng nhất là tư duy đánh giá: đánh giá nguồn tin, đánh giá đầu ra của AI, đánh giá cách trình bày và đánh giá mức độ phù hợp của công cụ với từng nhiệm vụ.",
+        reflection3Title: "Thách thức",
+        reflection3Copy: "Khó khăn lớn nhất là sắp xếp nội dung sao cho ngắn gọn nhưng vẫn đủ ý. Tôi giải quyết bằng cách chia portfolio thành từng phần rõ ràng: giới thiệu, học tập, dự án và tổng kết.",
+        contactKicker: "06 / Liên hệ",
+        contactTitle: "Sẵn sàng kết nối và học hỏi.",
+        contactCopy: "Tôi luôn sẵn sàng trao đổi về học tập, công nghệ số, trí tuệ nhân tạo và các cơ hội phát triển bản thân.",
+        contactEmail: "Email",
+        contactPhone: "0364602226",
+        contactFacebook: "Facebook",
+        contactLinkedIn: "LinkedIn",
+        contactGitHub: "GitHub",
+        phoneLink: "0364602226 ↗",
+        footerLeft: "© 2026 Lê Hải Hoàng",
+        footerRight: "AI Student Portfolio"
+      },
+      en: {
+        brand: "Le Hai Hoang",
+        navAbout: "About",
+        navEducation: "Education",
+        navProjects: "Projects",
+        navReflection: "Reflection",
+        navContact: "Contact",
+        heroEyebrow: "Digital Portfolio",
+        heroTitle: "Le Hai Hoang",
+        heroLead: "Artificial Intelligence student at VNU University of Engineering and Technology, interested in how AI, computational thinking, and digital skills can solve learning and real-life problems responsibly.",
+        heroPill1: "K70 - AI2",
+        heroPill2: "GPA 4.0",
+        heroPill3: "Hanoi, Vietnam",
+        heroCtaPrimary: "View assignments",
+        heroCtaSecondary: "Contact",
+        aboutKicker: "01 / About",
+        aboutTitle: "A clear, organized, and shareable learning profile.",
+        aboutLead: "I am an Artificial Intelligence student who is passionate about solving real-world problems through data and deep learning architectures. With strong logical mathematical thinking and the ability to implement algorithms in code, I aim to build AI models that are efficient, accurate, and valuable in practical applications. Beyond technology, I seek balance and creative inspiration through music.",
+        factNameLabel: "Name",
+        factName: "Le Hai Hoang",
+        factDobLabel: "Date of birth",
+        factDob: "March 14, 2007",
+        factLocationLabel: "Location",
+        factLocation: "Hanoi, Vietnam",
+        factInterestLabel: "Interests",
+        factInterest: "Applied AI, algorithms, digital learning",
+        educationKicker: "02 / Education",
+        educationTitle: "An academic foundation oriented toward AI.",
+        eduSchoolTitle: "University",
+        eduSchoolCopy: "VNU University of Engineering and Technology.",
+        eduMajorTitle: "Major",
+        eduMajorCopy: "Artificial Intelligence, class K70 - AI2.",
+        eduGpaTitle: "GPA",
+        eduGpaCopy: "Maintaining a serious and consistent learning mindset.",
+        eduAwardTitle: "Scholarship",
+        eduAwardCopy: "Academic encouragement scholarship from VNU University of Engineering and Technology.",
+        skillsKicker: "03 / Skills",
+        skillsTitle: "Capabilities developed through the course.",
+        skill1Title: "Academic foundation",
+        skill1Item1: "Data structures",
+        skill1Item2: "Algorithms",
+        skill1Item3: "Calculus",
+        skill1Item4: "Computational thinking",
+        skill2Title: "Digital tools",
+        skill2Item1: "File management",
+        skill2Item2: "Google Workspace",
+        skill2Item3: "Academic search",
+        skill2Item4: "Document archiving",
+        skill3Title: "Applied AI",
+        skill3Item1: "Prompt engineering",
+        skill3Item2: "AI output evaluation",
+        skill3Item3: "Content creation",
+        skill3Item4: "Responsible AI use",
+        skill4Title: "Soft skills",
+        skill4Item1: "Team collaboration",
+        skill4Item2: "Result presentation",
+        skill4Item3: "Self-learning",
+        skill4Item4: "Information critique",
+        projectsKicker: "04 / Coursework Projects",
+        projectsTitle: "Six assignments organized into one portfolio product.",
+        projectLink: "View PDF",
+        project1Title: "Basic file and folder operations",
+        project1Desc: "I reorganized my learning folder with a clear structure, consistent file naming, and screenshot evidence. The assignment helped me understand that good data organization is the first step toward effective study and work.",
+        project1Tag1: "File system",
+        project1Tag2: "Data organization",
+        project1Tag3: "Evidence",
+        project2Title: "Academic information search and evaluation",
+        project2Desc: "I practiced searching across multiple sources, comparing reliability, and checking authorship, publication time, and purpose. The result was an evaluation table that trained me to avoid passively accepting information.",
+        project2Tag1: "Academic search",
+        project2Tag2: "Sources",
+        project2Tag3: "Evaluation",
+        project3Title: "Effective prompts for learning tasks",
+        project3Desc: "I compared an initial prompt with an improved version by adding role, context, output requirements, and evaluation criteria. This showed me that the quality of a question directly affects the quality of an AI response.",
+        project3Tag1: "Prompt",
+        project3Tag2: "AI-assisted learning",
+        project3Tag3: "Result comparison",
+        project4Title: "Online collaboration tools for group projects",
+        project4Desc: "I simulated a group workflow using online tools such as shared documents, task assignment, and progress tracking. The assignment emphasized clear communication and visible work history in digital environments.",
+        project4Tag1: "Collaboration",
+        project4Tag2: "Team management",
+        project4Tag3: "Digital work",
+        project5Title: "Generative AI for creative content support",
+        project5Desc: "I used AI to brainstorm ideas, draft content, and improve presentation. I focused on fact-checking, editing with my own voice, and treating AI as a support tool rather than a replacement for human thinking.",
+        project5Tag1: "Generative AI",
+        project5Tag2: "Creativity",
+        project5Tag3: "Editing",
+        project6Title: "Responsible AI use in learning and research",
+        project6Desc: "I studied principles of transparency, citation, privacy, and academic integrity when using AI. The assignment helped me define the boundary between reasonable support and overdependence on tools.",
+        project6Tag1: "AI ethics",
+        project6Tag2: "Academic integrity",
+        project6Tag3: "Responsibility",
+        reflectionKicker: "05 / Reflection",
+        reflectionTitle: "Looking back on the portfolio-building process.",
+        reflectionQuote: "“Technology is truly useful only when I know how to ask the right questions and use it responsibly.”",
+        reflectionQuoteMeta: "The biggest lesson from building this portfolio",
+        reflection1Title: "What I learned",
+        reflection1Copy: "I learned how to turn separate assignments into a structured, readable system with clear evidence. It also gave me a chance to reflect on the learning process instead of only saving final results.",
+        reflection2Title: "Key skill",
+        reflection2Copy: "The most important skill is evaluative thinking: evaluating sources, AI outputs, presentation choices, and whether a tool fits a specific task.",
+        reflection3Title: "Challenge",
+        reflection3Copy: "The biggest challenge was organizing the content so it stayed concise while still being complete. I addressed this by dividing the portfolio into clear sections: about, education, projects, and reflection.",
+        contactKicker: "06 / Contact",
+        contactTitle: "Open to connection and learning.",
+        contactCopy: "I am always ready to discuss learning, digital technology, artificial intelligence, and opportunities for personal growth.",
+        contactEmail: "Email",
+        contactPhone: "0364602226",
+        contactFacebook: "Facebook",
+        contactLinkedIn: "LinkedIn",
+        contactGitHub: "GitHub",
+        phoneLink: "0364602226 ↗",
+        footerLeft: "© 2026 Le Hai Hoang",
+        footerRight: "AI Student Portfolio"
+      }
+    };
+
+    const languageButtons = document.querySelectorAll("[data-lang]");
+    const translatableNodes = document.querySelectorAll("[data-i18n]");
+
+    function setLanguage(lang) {
+      const dictionary = translations[lang] || translations.vi;
+      document.body.classList.add("is-switching");
+      window.setTimeout(() => {
+        translatableNodes.forEach((node) => {
+          const key = node.dataset.i18n;
+          if (dictionary[key]) {
+            node.textContent = dictionary[key];
+          }
+        });
+        document.documentElement.lang = lang;
+        languageButtons.forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.lang === lang));
+        });
+        localStorage.setItem("portfolio-language", lang);
+        document.body.classList.remove("is-switching");
+      }, 110);
+    }
+
+    languageButtons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.lang));
+    });
+
+    setLanguage(localStorage.getItem("portfolio-language") || "vi");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>
