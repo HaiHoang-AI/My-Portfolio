@@ -413,8 +413,15 @@
     .education-grid,
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1rem;
+    }
+
+    .education-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .stat,
@@ -893,15 +900,6 @@
         </div>
         <div class="skills-grid">
           <article class="skill-group reveal">
-            <h3 class="skill-title" data-i18n="skill1Title">Nền tảng học thuật</h3>
-            <ul class="skill-list">
-              <li data-i18n="skill1Item1">Cấu trúc dữ liệu</li>
-              <li data-i18n="skill1Item2">Giải thuật</li>
-              <li data-i18n="skill1Item3">Giải tích</li>
-              <li data-i18n="skill1Item4">Tư duy tính toán</li>
-            </ul>
-          </article>
-          <article class="skill-group reveal">
             <h3 class="skill-title" data-i18n="skill2Title">Công cụ số</h3>
             <ul class="skill-list">
               <li data-i18n="skill2Item1">Quản lý tệp</li>
@@ -1160,11 +1158,6 @@
         eduAwardCopy: "Học bổng khuyến khích học tập của trường Đại học Công nghệ.",
         skillsKicker: "03 / Kỹ năng",
         skillsTitle: "Những năng lực đang được rèn luyện qua môn học.",
-        skill1Title: "Nền tảng học thuật",
-        skill1Item1: "Cấu trúc dữ liệu",
-        skill1Item2: "Giải thuật",
-        skill1Item3: "Giải tích",
-        skill1Item4: "Tư duy tính toán",
         skill2Title: "Công cụ số",
         skill2Item1: "Quản lý tệp",
         skill2Item2: "Google Workspace",
@@ -1273,11 +1266,6 @@
         eduAwardCopy: "Academic encouragement scholarship from VNU University of Engineering and Technology.",
         skillsKicker: "03 / Skills",
         skillsTitle: "Capabilities developed through the course.",
-        skill1Title: "Academic foundation",
-        skill1Item1: "Data structures",
-        skill1Item2: "Algorithms",
-        skill1Item3: "Calculus",
-        skill1Item4: "Computational thinking",
         skill2Title: "Digital tools",
         skill2Item1: "File management",
         skill2Item2: "Google Workspace",
